@@ -1,0 +1,61 @@
+@import url("../../../styles/theme.less");
+
+.content-container {
+  width: 100%;
+  height: 100%;
+  color: @fontColorBlack;
+  .content-top {
+    width: 100%;
+    height: 98px;
+    box-sizing: border-box;
+    border: 1px solid #bababa;
+    display: flex;
+    justify-content: space-between;
+    .content-top-logo {
+      width: 278px;
+      height: 100%;
+      background: url("../assets/logo.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    .content-top-login {
+      width: 338px;
+      height: 100%;
+      padding-right: 55px;
+      display: flex;
+      justify-content: space-between;
+      .login-icon {
+        width: 31px;
+        height: 31px;
+        background: url("../assets/head-portait.svg");
+        margin: auto 0;
+      }
+      .login-username {
+        height: 100%;
+        line-height: 98px;
+        letter-spacing: 1px;
+        font-size: @fontSizeDefault;
+      }
+      .login-control {
+        width: 15px;
+        height: 9px;
+        margin: auto 0;
+        background: green;
+      }
+    }
+  }
+  .content-bottom {
+    width: 100%;
+    height: calc(100% - 98px);
+    display: flex;
+    .content-bottom-left {
+      width: 278px;
+      height: 100%;
+      background-color: @backgroundContentColor;
+    }
+    .content-bottom-right {
+      width: calc(100% - 278px);
+      height: 100%;
+    }
+  }
+}

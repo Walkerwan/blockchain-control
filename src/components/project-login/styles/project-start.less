@@ -1,0 +1,139 @@
+@import url("../../../styles/theme.less");
+
+.project-container {
+    position: relative;
+  width: 100%;
+  height: 100vh;
+  min-width: 1440px;
+  min-height: 900px;
+  color: @fontColorWhite;
+  .project-top {
+    height: 75px;
+    background-color: @backgroundThemeColorBlack;
+    display: flex;
+    .project-top-left {
+      flex: 3;
+    }
+    .project-top-center {
+      flex: 14;
+      .project-top-center-icon {
+        display: inline-block;
+        width: 160px;
+        height: 75px;
+        background-image: url("../assets/logo.png");
+        background-repeat: no-repeat;
+        background-position: 0 center;
+      }
+      .project-catalog {
+        display: inline-block;
+        margin-left: 8%;
+        .item {
+          float: left;
+          height: 75px;
+          line-height: 75px;
+          margin-right: 40px;
+          font-size: @fontSizeDefault;
+          font-weight: bold;
+          cursor: pointer;
+          &:last-child {
+            color: @fontColorBlue;
+          }
+        }
+      }
+    }
+    .project-top-right {
+      flex: 7;
+      display: inline-block;
+      .control {
+        float: left;
+        height: 75px;
+        line-height: 75px;
+        font-size: @fontSizeDefault;
+        font-weight: bold;
+      }
+      .login-or-register {
+        float: left;
+        height: 75px;
+        padding-top: 20px;
+        margin-left: 20px;
+        .register-or-login {
+          width: 110px;
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+  .project-center {
+      width:100%;
+      height: calc(100% - 275px);
+  }
+  .project-bottom {
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    height: 200px;
+    background-color: @backgroundThemeColorBlack;
+    .project-bottom-left {
+      flex: 3;
+      height: 200px;
+    }
+    .project-bottom-center {
+      flex: 6;
+      height: 200px;
+      position: relative;
+      .project-bottom-center-icon {
+        float: left;
+        width: 160px;
+        height: 200px;
+        background-image: url("../assets/bottom-logo.svg");
+        background-repeat: no-repeat;
+        background-position: 0 60px;
+      }
+      .project-bottom-list {
+        float: left;
+        height: 200px;
+        padding-top: 75px;
+        font-size: @fontSizeSmall;
+        color: @fontColorGray;
+        font-weight: bold;
+        // letter-spacing: 1px;
+        margin-left: 8.5%;
+        &:nth-of-type(1) {
+            margin-left: 13.9%
+        }
+        &:nth-of-type(3) {
+            position: absolute;
+            right: 0px;
+        }
+        .list-item {
+          margin-bottom: 10px;
+          cursor: pointer;
+          &:first-child {
+            font-size: @fontSizeDefault;
+            color: @fontColorWhite;
+            margin-bottom: 21px;
+          }
+        }
+      }
+    }
+    .project-bottom-right {
+      flex: 7;
+      height: 200px;
+      display: flex;
+      .project-bottom-right-left {
+          flex: 3
+      }
+      .project-bottom-right-code {
+         flex: 3;
+          width: 110px;
+          height: 110px;
+          background-image: url("../assets/two-dimesion-code.png");
+          background-repeat: no-repeat;
+          background-position: center center;
+          margin-top: 60px;
+      }
+    }
+  }
+}
