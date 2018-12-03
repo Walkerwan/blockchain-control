@@ -71,16 +71,19 @@ export const contentCatalog = [
         children: [
           {
             name: "积分通兑",
+            url: "/project/content/product",
             hierarchy: 2,
             children: [
               {
-                name: "积分商城配置",
+                name: "配置表",
+                url: "/project/content/product/setting",
                 hierarchy: 3,
               }
             ]
           },
           {
             name: "我要定制",
+            url: "/project/content/product/ording",
             hierarchy: 2,
           }
         ]

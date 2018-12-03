@@ -30,9 +30,12 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        height: 659px;
+        height: 698px;
+        padding-bottom: 35px;
+        border-bottom: @borderWidthDefault solid #e6e6e6;
         .setting-item {
           width: 380px;
+          min-width: 380px;
           height: 100%;
           box-sizing: border-box;
           border: 1px solid #e7e7e7;
@@ -45,6 +48,159 @@
             font-weight: bold;
             color: #fff;
             background-color: #4bc3d9;
+          }
+          .setting-item-content {
+            height:583px;
+            padding: 36px 20px 35px 30px;
+            .setting-item-title1,
+            .setting-item-title2 {
+              text-align: center;
+              font-size: 18px;
+            }
+            .setting-item-title1 {
+              margin-bottom: 10px;
+            }
+            .setting-item-title2 {
+              margin-bottom: 30px;
+            }
+            .content-des {
+              font-size: 16px;
+              line-height: 28px;
+              margin-bottom: 10px;
+            }
+            .content-des1,
+            .content-des2 {
+              line-height: 30px;
+            }
+            .content-des2 {
+              margin-bottom: 30px;
+            }
+            .show-details {
+              color: #08c0fc;
+              font-size: 16px;
+              text-align: center;
+              margin-bottom: 20px;
+            }
+            .start-charging {
+              height: 16px;
+              text-align: center;
+              margin-left: -40px;
+              margin-bottom: 10px;
+            }
+            .money-hour {
+              height: 34px;
+              text-align: center;
+              margin-bottom: 27px;
+              .money-hour-des1 {
+                font-size: 34px;
+                color: #ff833b;
+              }
+              .money-hour-des2 {
+                font-size: 16px;
+                color: #ff833b;
+              }
+              .money-hour-des3 {
+                font-size: 16px;
+              }
+            }
+            .setting-item-button {
+              height: 45px;
+              line-height: 45px;
+              .button {
+                display: inline-block;
+                width: 180px;
+                height: 45px;
+                line-height: 45px;
+                text-align: center;
+                font-size: 18px;
+                background-color: #4bc3d9;
+                color: #ffffff;
+                border-radius: @borderRadiuDefault;
+                margin: 0 auto;
+                position: relative;
+                left: 50%;
+                margin-left: -90px;
+              }
+            }
+          }
+          &:nth-of-type(2) {
+            .setting-item-title {
+              background-color:#4bd987;
+            }
+            .setting-item-content {
+              .setting-item-button {
+                .button {
+                  background-color: #4bd987;
+                }
+              }
+            }
+          }
+          &:nth-of-type(3) {
+            .setting-item-title {
+              background-color:#93a9d5 ;
+            }
+            .setting-item-content {
+              .setting-item-button {
+                .button {
+                  background-color: #93a9d5;
+                }
+              }
+            }
+          }
+        }
+      }
+      .need-ording {
+        height: 18px;
+        line-height: 18px;
+        font-size: 18px;
+        color: #06bcff;
+        margin-top: 15px;
+      }
+      .content-content-footer {
+        width: 100%;
+        height: 260px;
+        padding-bottom: 40px;
+        .customer-service-number {
+          float: right;
+          width: 167px;
+          min-width: 167px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .customer-service-number-title {
+            height: 18px;
+            line-height: 18px;
+            font-size: 18px;
+            color: #282828;
+          }
+          .customer-service-number-content {
+            width: 100%;
+            height: 167px;
+            background: url("../assets/two-dimesion-code.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+        }
+        .privite-line {
+          float: right;
+          width: 390px;
+          min-width: 390px;
+          height: 100%;
+          .privite-line-title {
+            height: 18px;
+            line-height: 18px;
+            font-size: 18px;
+            color: #282828;
+            margin-bottom: 40px;
+          }
+          .privite-line-content {
+            height: 28px;
+            line-height: 28px;
+            font-size: 28px;
+            color: #282828;
+            letter-spacing: 1px;
           }
         }
       }

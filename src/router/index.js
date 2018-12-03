@@ -17,6 +17,8 @@ import ProjectContentManagerCenter from '@/components/manager-center/manager-cen
 import ProjectContentOrderCenter from '@/components/order-center/order-center.vue'
 import ProjectContentInvoiceCenter from '@/components/invoice-center/invoice-center.vue'
 
+import ProjectContentProductCenterSetting from '@/components/product-center/product-setting.vue'
+import ProjectContentProductCenterOrding from '@/components/product-center/product-ording.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -73,6 +75,16 @@ export default new Router({
           path: '/project/content/product',
           name: 'ProjectContentProductCenter',
           component: ProjectContentProductCenter,
+        },
+        {
+          path: '/project/content/product/setting',
+          name: 'ProjectContentProductCenterSetting',
+          component: ProjectContentProductCenterSetting,
+        },
+        {
+          path: '/project/content/product/ording',
+          name: 'ProjectContentProductCenterOrding',
+          component: ProjectContentProductCenterOrding,
         },
         {
           path: '/project/content/manage',
