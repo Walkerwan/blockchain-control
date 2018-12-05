@@ -19,6 +19,9 @@ import ProjectContentInvoiceCenter from '@/components/invoice-center/invoice-cen
 
 import ProjectContentProductCenterSetting from '@/components/product-center/product-setting.vue'
 import ProjectContentProductCenterOrding from '@/components/product-center/product-ording.vue'
+
+import ProjectContentManagerApiUse from '@/components/manager-center/api-use.vue'
+import ProjectContentManagerOperateLog from '@/components/manager-center/operate-log.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -90,6 +93,16 @@ export default new Router({
           path: '/project/content/manage',
           name: 'ProjectContentManagerCenter',
           component: ProjectContentManagerCenter,
+        },
+        {
+          path: '/project/content/manage/api',
+          name: 'ProjectContentManagerApiUse',
+          component: ProjectContentManagerApiUse,
+        },
+        {
+          path: '/project/content/manage/log',
+          name: 'ProjectContentManagerOperateLog',
+          component: ProjectContentManagerOperateLog,
         },
         {
           path: '/project/content/order',

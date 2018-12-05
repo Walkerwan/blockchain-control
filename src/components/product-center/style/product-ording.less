@@ -22,5 +22,119 @@
         color: #00a2e9;
       }
     }
+    .ording-container-content-bottom {
+      display: flex;
+      height: calc(100% - 18px);
+      padding-top: 50px;
+      .bottom-left-part {
+        flex: 17;
+        height: 500px;
+        display: flex;
+        border-right: 1px solid #e8e8e8;
+        box-sizing: border-box;
+        .left-part-left {
+          flex: 23;
+          height: 100%;
+        }
+        .left-part-center {
+          flex: 64;
+          height: 100%;
+          padding-top: 20px;
+          .left-part-center-title {
+            height: 23px;
+            line-height: 23px;
+            font-size: 23px;
+            margin-bottom: 45px;
+            //   font-weight: bold;
+          }
+          .left-part-left-form {
+            width: 100%;
+            .form-item {
+              width: 100%;
+              height: 37px;
+              margin-bottom: 40px;
+              &.form-item-setting {
+                height: 146px;
+                .setting-text {
+                  width: 100%;
+                  height: 146px;
+                  font-size: 16px;
+                  color: #8e8e8e;
+                  padding: 10px 10px 0px 10px;
+                }
+              }
+              input {
+                width: 100%;
+                height: 37px;
+              }
+              .form-operate {
+                width: 240px;
+                height: 35px;
+                margin: 0 auto;
+                .form-button {
+                  width: 111px;
+                  height: 35px;
+                  font-size: 16px;
+                  line-height: 16px;
+                }
+              }
+            }
+          }
+        }
+        .left-part-right {
+          flex: 17;
+          height: 100%;
+        }
+      }
+      .bottom-right-part {
+        flex: 10;
+        width: 100%;
+        height: 500px;
+        padding-top: 20px;
+        padding-left: 90px;
+        .privite-line {
+          width: 400px;
+          min-width: 400px;
+          margin-bottom: 60px;
+          .privite-line-title {
+            height: 18px;
+            line-height: 18px;
+            font-size: 18px;
+            color: #282828;
+            margin-bottom: 28px;
+          }
+          .privite-line-content {
+            height: 28px;
+            line-height: 28px;
+            font-size: 28px;
+            color: #282828;
+            letter-spacing: 1px;
+            text-indent: 38px;
+          }
+        }
+        .customer-service-number {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .customer-service-number-title {
+            height: 18px;
+            line-height: 18px;
+            font-size: 18px;
+            color: #282828;
+            margin-bottom: 35px;
+          }
+          .customer-service-number-content {
+            margin-left: 80px;
+            width: 167px;
+            height: 167px;
+            background: url("../assets/two-dimesion-code.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+        }
+      }
+    }
   }
 }

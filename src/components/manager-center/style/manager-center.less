@@ -1,0 +1,155 @@
+@import url("../../../styles/theme.less");
+
+.manager-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 22px;
+  background-color: #f8f8f8;
+  color: @fontColorBlack;
+  .manage-container-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #ffffff;
+    padding: 30px 113px 0px 70px;
+    .manage-container-content-title {
+      display: block;
+      height: 18px;
+      line-height: 18px;
+      font-size: 18px;
+      color: #282828;
+      .color-blue {
+        color: #00a2e9;
+      }
+    }
+    .setting-info {
+      position: relative;
+      font-size: 18px;
+      height: 58px;
+      line-height: 58px;
+      .setting-info-search {
+        position: absolute;
+        top: -14px;
+        right: 0;
+        width: 450px;
+        height: 38px;
+        outline: none;
+        box-sizing: border-box;
+        border: 1px solid #bababa;
+        text-indent: 20px;
+        border-radius: @borderRadiuDefault;
+      }
+    }
+    .setting-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 393px;
+      margin-bottom: 49px;
+      .setting-content-left {
+        width: 296px;
+        height: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e6e6e6;
+        border-radius: @borderRadiuDefault;
+        padding: 30px 0px 0px 44px;
+        .setting-content-left-list {
+          width: 100%;
+          height: 100%;
+          font-size: @fontSizeDefault;
+          .list-item {
+            margin-bottom: 22px;
+            .list-item-name {
+              color: #ababab;
+              margin-bottom: 6px;
+            }
+            .list-item-text {
+              color: #282828;
+            }
+          }
+        }
+      }
+      .setting-content-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc(100% - 321px);
+        height: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e6e6e6;
+        border-radius: @borderRadiuDefault;
+        padding: 40px 40px 40px 30px;
+        .setting-content-right-list {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          .right-list-item {
+            width: 49%;
+            height: 121px;
+            background-color: #f4f4f4;
+            border-radius: @borderRadiuDefault;
+            padding: 28px 0px 28px 58px;
+            .node-icon,
+            .block-icon,
+            .trade-icon,
+            .constract-icon {
+              float: left;
+              width: 65px;
+              height: 65px;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+            .node-icon {
+              background: url("../assets/node-num.png");
+            }
+            .block-icon {
+              background: url("../assets/block-num.png");
+            }
+            .trade-icon {
+              background: url("../assets/trade-num.png");
+            }
+            .constract-icon {
+              background: url("../assets/constract-num.png");
+            }
+            .list-item-right {
+              float: left;
+              width: calc(100% - 65px);
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding-left: 35px;
+              .bottom-text {
+                color: #ababab;
+                font-size: @fontSizeDefault;
+              }
+              .top-num {
+                font-size: 26px;
+                color: #333333;
+              }
+            }
+          }
+        }
+      }
+    }
+    .trade-record {
+      height: 18px;
+      line-height: 18px;
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+    .trade-record-form {
+      width: 100%;
+    }
+    .node-record {
+      height: 18px;
+      line-height: 18px;
+      font-size: 18px;
+      margin-top: 60px;
+      margin-bottom: 25px;
+    }
+    .node-record-form {
+        width: 100%;
+    }
+  }
+}

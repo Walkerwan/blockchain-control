@@ -95,14 +95,17 @@ export const contentCatalog = [
         children: [
           {
             name: "积分通兑",
+            url: "/project/content/manage",
             hierarchy: 2,
             children: [
               {
                 name: "API调用",
+                url: "/project/content/manage/api",
                 hierarchy: 3,
               },
               {
                 name: "操作日志",
+                url: "/project/content/manage/log",
                 hierarchy: 3,
               }
             ]

@@ -1,0 +1,39 @@
+@import url("../../../styles/theme.less");
+
+.log-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 22px;
+  background-color: #f8f8f8;
+  color: @fontColorBlack;
+  .log-container-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #ffffff;
+    padding: 30px 113px 20px 70px;
+    .log-container-content-title {
+      display: block;
+      height: 18px;
+      line-height: 18px;
+      font-size: 18px;
+      color: #282828;
+      margin-bottom: 25px;
+      .color-blue {
+        color: #00a2e9;
+      }
+    }
+    .select-time {
+        width: 348px;
+        height: 30px;
+        margin-bottom: 25px;
+    }
+    .select-content {
+        width: 887px;
+        height: 668px;
+        box-sizing: border-box;
+        border-radius: @borderRadiuDefault;
+        border: 1px solid #b1b1b1;
+    }
+  }
+}
