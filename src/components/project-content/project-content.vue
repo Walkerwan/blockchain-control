@@ -1,7 +1,7 @@
 <template>
   <div class="content-container">
     <div class="content-top">
-      <div class="content-top-logo"></div>
+      <div class="content-top-logo" @click="skipLogin"></div>
       <div class="content-top-login">
         <div class="login-icon"></div>
         <div class="login-username">2431136239@qq.com</div>
@@ -32,6 +32,11 @@ export default {
     return {
       catalogData: contentCatalog
     };
+  },
+  methods: {
+    skipLogin() {
+      this.$router.push({ path: "/project/login" });
+    }
   }
 };
 </script>

@@ -1,0 +1,188 @@
+@import url("../../../styles/theme.less");
+
+.invoice-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 22px;
+  background-color: #f8f8f8;
+  color: @fontColorBlack;
+  .invoice-container-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #ffffff;
+    padding: 30px 113px 40px 70px;
+    .invoice-container-content-title {
+      display: block;
+      height: 18px;
+      line-height: 18px;
+      font-size: 18px;
+      color: #282828;
+      margin-bottom: 40px;
+      .color-blue {
+        color: #00a2e9;
+      }
+    }
+    .order-operate {
+      display: flex;
+      width: 90%;
+      height: 32px;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      .order-number {
+        display: flex;
+        .order-number-text {
+          height: 32px;
+          line-height: 32px;
+          margin-right: 10px;
+          white-space: nowrap;
+        }
+      }
+      .order-time {
+        display: flex;
+        height: 32px;
+        line-height: 32px;
+        .order-time-text {
+          margin-right: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .time-select-start {
+          margin-right: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .time-select-end {
+          margin-left: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      .order-type {
+        display: flex;
+        height: 32px;
+        line-height: 32px;
+        .order-type-text {
+          white-space: nowrap;
+          margin-right: 10px;
+        }
+        .order-type-select {
+          width: 130px;
+          min-width: 130px;
+        }
+      }
+      .order-state {
+        display: flex;
+        height: 32px;
+        line-height: 32px;
+        .order-state-text {
+          white-space: nowrap;
+          margin-right: 10px;
+        }
+        .order-state-select {
+          width: 130px;
+          min-width: 130px;
+        }
+      }
+    }
+    .order-content-tab {
+      .order-page {
+        float: right;
+        margin-top: 30px;
+        margin-bottom: 50px;
+      }
+    }
+    .order-content-bottom {
+        display: flex;
+        width: 100%;
+        height: 495px;;
+        justify-content: space-between;
+        .order-content-bottom-left {
+          width: 482px;
+          min-width: 482px;
+          height: 495px;
+          box-sizing: border-box;
+          .order-content-bottom-left-title {
+            height: 18px;
+            line-height: 18px;
+            font-size: 18px;
+            color: #282828;
+            margin-bottom: 22px;
+          }
+          .order-content-bottom-left-content {
+            width: 100%;
+            height: 455px;
+            box-sizing: border-box;
+            border: 1px solid #e7e7e7;
+            border-radius: @borderRadiuDefault;
+            padding: 30px 60px 0px 45px;
+            font-size: 16px;
+            color: #3c3c3c;
+            .form-item {
+                margin-bottom: 17px;
+                .radio-group {
+                    margin-left: 13px;
+                }
+                .button-item {
+                    width: 110px;
+                    height: 35px;
+                    line-height: 35px;
+                    text-align: center;
+                    font-size: 16px;
+                    border-radius: @borderRadiuDefault;
+                    color: #ffffff;
+                    background-color: #169bef;
+                    cursor: pointer;
+                    margin-left: 50px;
+                }
+            }
+          }
+        }
+        .order-content-bottom-right {
+          .privite-line {
+            width: 400px;
+            min-width: 400px;
+            margin-bottom: 60px;
+            .privite-line-title {
+              height: 18px;
+              line-height: 18px;
+              font-size: 18px;
+              color: #282828;
+              margin-bottom: 20px;
+            }
+            .privite-line-content {
+              height: 28px;
+              line-height: 28px;
+              font-size: 28px;
+              color: #282828;
+              letter-spacing: 1px;
+            }
+          }
+          .customer-service-number {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .customer-service-number-title {
+              height: 18px;
+              line-height: 18px;
+              font-size: 18px;
+              color: #282828;
+              margin-bottom: 10px;
+            }
+            .customer-service-number-content {
+              width: 167px;
+              height: 167px;
+              background: url("../assets/two-dimesion-code.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+          }
+        }
+      }
+  }
+}

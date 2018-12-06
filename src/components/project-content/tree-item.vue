@@ -104,7 +104,9 @@ export default {
       height: 12px;
       right: 20px;
       top: 24px;
-      background: url("./assets/arrow-left.svg");
+      background: url("./assets/arrow-up.svg");
+      transform:rotate(270deg);
+      // background: url("./assets/arrow-left.svg");
       background-repeat: no-repeat;
       background-position: center center;
     }
