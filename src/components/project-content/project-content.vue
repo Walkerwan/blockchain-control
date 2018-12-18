@@ -13,9 +13,9 @@
         <tree-item :treeData="catalogData"></tree-item>
       </div>
       <div class="content-bottom-right">
-        <keep-alive>
+        <!-- <keep-alive> -->
           <router-view></router-view>
-        </keep-alive>
+        <!-- </keep-alive> -->
       </div>
     </div>
   </div>

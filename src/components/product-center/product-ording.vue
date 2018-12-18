@@ -16,21 +16,22 @@
               id="left-part-left-form"
               ref="formInline"
               :model="formInline"
+              :rules="ruleInline"
               inline
-              :label-width="100"
+              :label-width="120"
             >
-              <FormItem label="行业类型：" class="form-item">
-                <input v-model="formInline.username">
+              <FormItem label="行业类型：" prop="userType" class="form-item">
+                <Input class="input-item" v-model="formInline.userType"></Input>
               </FormItem>
               <FormItem label="制定需求：" class="form-item form-item-setting">
-                <textarea class="setting-text" cols="60" rows="5"></textarea>
+                <textarea class="setting-text" cols="60" rows="5" v-model="formInline.textContent"></textarea>
               </FormItem>
-              <FormItem label="联系电话：" class="form-item">
-                <input v-model="formInline.telenum">
+              <FormItem label="联系电话：" prop="telenum" class="form-item">
+                <Input class="input-item" v-model="formInline.telenum"></Input>
               </FormItem>
               <FormItem class="form-item">
                 <div class="form-operate">
-                  <Button class="form-button">返回</Button>
+                  <Button class="form-button" @click="skipProductCenter">返回</Button>
                   <Button
                     class="form-button"
                     type="primary"
@@ -59,46 +60,70 @@
 </template>
 
 <script>
+import LoginTool from "@/components/project-login/utils/login-tool.js";
+import RequestInterface from "@/api/interface.js";
+
 export default {
   data() {
+    const telValidate = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error("请输入手机号码！"));
+        return;
+      }
+      if (!LoginTool.isTelephoneUser(value)) {
+        callback("请输入正确的手机号码！");
+        return;
+      }
+      callback();
+    };
     return {
       formInline: {
-        username: "",
+        userType: "",
+        textContent:"",
         telenum: ""
       },
       ruleInline: {
-        // user: [
-        //   {
-        //     required: true,
-        //     message: "Please fill in the user name",
-        //     trigger: "blur"
-        //   }
-        // ],
-        // password: [
-        //   {
-        //     required: true,
-        //     message: "Please fill in the password.",
-        //     trigger: "blur"
-        //   },
-        //   {
-        //     type: "string",
-        //     min: 6,
-        //     message: "The password length cannot be less than 6 bits",
-        //     trigger: "blur"
-        //   }
-        // ]
+        userType: [
+          {
+            required: true,
+            message: "请填写用户名",
+            trigger: "blur"
+          }
+        ],
+        telenum:[
+          {
+            validator: telValidate,
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
   methods: {
+    // 提交定制
     handleSubmit(name) {
+      const that = this;
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("Success!");
+          RequestInterface.productOrding({
+            industryType: that.formInline.userType,
+            costomDemand: that.formInline.textContent,
+            mobileNumber: that.formInline.telenum,
+          }).then(res => {
+            if(res.status == 0) {
+              that.$Message.success("定制成功");
+              that.$router.push({ path: "/project/content/product" });
+              return;
+            }
+          })
         } else {
           this.$Message.error("Fail!");
         }
       });
+    },
+    //返回产品中心
+    skipProductCenter() {
+      this.$router.push({ path: "/project/content/product" });
     }
   }
 };
@@ -111,6 +136,18 @@ export default {
 <style>
 #left-part-left-form .ivu-form-item-label {
   font-size: 16px !important;
+}
+#left-part-left-form .form-item .ivu-input {
+  height: 36px;
+  line-height: 36px;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0px;
+  color: #a7a6a6;
+  text-indent: 12px;
+  outline-color: rgba(255, 255, 255, 0);
 }
 </style>
 

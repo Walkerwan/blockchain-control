@@ -18,23 +18,17 @@
             :model="formInline"
             :rules="ruleInline"
             inline
-            :label-width="60"
+            :label-width="80"
           >
-            <FormItem label="名称：" class="form-item">
-              <input v-model="formInline.username">
+            <FormItem label="名称：" prop="username" class="form-item">
+              <Input class="input-item" v-model="formInline.username"></Input>
             </FormItem>
-            <FormItem label="算法：" class="form-item">
-              <input v-model="formInline.algorithm">
-            </FormItem>
-            <FormItem label="配置：" class="form-item form-item-setting">
-                <textarea class="setting-text" name="" id="" cols="60" rows="5">基础配置:
-                    FABRIC1.2  2核CPU 4G内存 50G系统盘
-                    1个CA节点，1个orderer节点，1个peer节点
-                </textarea>
+            <FormItem :label="item.attrName+':'" class="form-item" v-for="(item,index) in settingData" :key="index">
+              <div class="text-show">{{item.attrVals[0].attrVal}}</div>
             </FormItem>
             <FormItem class="form-item">
               <div class="form-operate">
-                <Button class="form-button">返回</Button>
+                <Button class="form-button" @click="skipProductCenter">返回</Button>
                 <Button
                   class="form-button"
                   type="primary"
@@ -51,6 +45,9 @@
 </template>
 
 <script>
+import LoginTool from "@/components/project-login/utils/login-tool.js";
+import RequestInterface from "@/api/interface.js";
+
 export default {
   data() {
     return {
@@ -59,38 +56,60 @@ export default {
         algorithm: ""
       },
       ruleInline: {
-        // user: [
-        //   {
-        //     required: true,
-        //     message: "Please fill in the user name",
-        //     trigger: "blur"
-        //   }
-        // ],
-        // password: [
-        //   {
-        //     required: true,
-        //     message: "Please fill in the password.",
-        //     trigger: "blur"
-        //   },
-        //   {
-        //     type: "string",
-        //     min: 6,
-        //     message: "The password length cannot be less than 6 bits",
-        //     trigger: "blur"
-        //   }
-        // ]
-      }
+        username:[
+          {
+            required: true,
+            message: "请填写用户名",
+            trigger: "blur"
+          }
+        ]
+      },
+      settingData: []
     };
+  },
+  created() {
+    const that =this;
+    const skuId = this.$route.query.skuId;
+    if(!skuId) {
+      return
+    }
+    RequestInterface.getSettingList({
+      skuId: skuId
+    }).then(res => {
+      debugger
+      if(res.status == 0) {
+        if(res.data) {
+          that.settingData = res.data;
+        }
+        return;
+      }
+    })
   },
   methods: {
     handleSubmit(name) {
+      const that = this;
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("Success!");
+          RequestInterface.createOrding({
+            skuId: that.$route.query.skuId,
+            name: that.formInline.username,
+          }).then(res => {
+            if(res.status == 0) {
+              that.$router.push({ path: "/project/content/order" });
+              return;
+            }
+            if(res.status == -1) {
+              that.$Message.error(res.message);
+              return;
+            }
+          })
         } else {
           this.$Message.error("Fail!");
         }
       });
+    },
+    skipProductCenter(){
+      this.$router.push({ path: "/project/content/product" });
     }
   }
 };
@@ -103,6 +122,18 @@ export default {
 <style>
 #content-center-form .ivu-form-item-label {
   font-size: 16px !important;
+}
+#content-center-form .form-item .ivu-input {
+  height: 36px;
+  line-height: 36px;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0px;
+  color: #a7a6a6;
+  text-indent: 12px;
+  outline-color: rgba(255, 255, 255, 0);
 }
 </style>
 

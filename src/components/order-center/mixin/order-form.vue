@@ -1,4 +1,6 @@
 <script>
+import { orderStateList } from "@/constant.js";
+
 export default {
   data() {
     return {
@@ -7,6 +9,7 @@ export default {
           title: "序号",
           key: "sortNum",
           ellipsis: true,
+          width: 80,
           render: (h, params) => {
             return h(
               "span",
@@ -21,6 +24,7 @@ export default {
         },
         {
           title: "订单号",
+          width: 200,
           key: "orderNum",
           ellipsis: true,
           render: (h, params) => {
@@ -68,7 +72,7 @@ export default {
           }
         },
         {
-          title: "订单金额",
+          title: "订单金额（/元",
           key: "orderMoney",
           ellipsis: true,
           render: (h, params) => {
@@ -87,6 +91,7 @@ export default {
           title: "订单时间",
           key: "orderTime",
           ellipsis: true,
+          width: 250,
           render: (h, params) => {
             return h(
               "span",
@@ -132,51 +137,55 @@ export default {
           }
         }
       ],
-      orderDaTa: [
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        },
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        },
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        },
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        }
-      ],
+      orderDaTa: [],
+      orderType:[],
       orderTotal: 100,
-      orderPageSize: 10
+      orderPageSize: 10,
+      targetPageIndex: 1,
+      orderStateList: orderStateList,
+      lastLoginStart:'',
+      lastLoginEnd: '',
     };
   },
   methods: {
     // 切换页
-    togglePage() {}
+    togglePage(index) {
+      this.targetPageIndex = index;
+      this.getOrderListData({
+        page: this.targetPageIndex,
+        rows: this.orderPageSize
+      });
+    },
+    // 切换页码数
+    togglePageSize(size) {
+      this.orderPageSize = size;
+      this.getOrderListData({
+        page: this.targetPageIndex,
+        rows: this.orderPageSize
+      });
+    },
+    // 搜索订单
+    searchOrderList() {
+      debugger
+      this.targetPageIndex = 1;
+      this.getOrderListData({
+        orderNo: this.orderNum,
+        cloudId: this.orderTypeValue,
+        status: this.orderStateValue,
+        lastLoginStart: this.lastLoginStart,
+        lastLoginEnd: this.lastLoginEnd,
+        page: this.targetPageIndex,
+        rows: this.orderPageSize
+      });
+    },
+    // 获取起始日期
+    getLastLoginStart(val,type){
+      this.lastLoginStart = val;
+    },
+    // 获取结束日期
+    getLastLoginEnd(val,type) {
+      this.lastLoginEnd = val;
+    }
   }
 };
 </script>

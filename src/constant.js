@@ -73,13 +73,6 @@ export const contentCatalog = [
             name: "积分通兑",
             url: "/project/content/product",
             hierarchy: 2,
-            children: [
-              {
-                name: "配置表",
-                url: "/project/content/product/setting",
-                hierarchy: 3,
-              }
-            ]
           },
           {
             name: "我要定制",
@@ -123,5 +116,40 @@ export const contentCatalog = [
         url: "/project/content/invoice",
       },
     ]
+  }
+]
+
+export const orderStateList = [
+  {
+    label: "全部",
+    value: -1
+  },
+  {
+    label: "未支付",
+    value:0
+  },
+  {
+    label: "正常",
+    value:1
+  },
+  {
+    label: "到期",
+    value: 3
+  },
+  {
+    label: "解散",
+    value: 4
+  },
+  {
+    label: "超时",
+    value: 5
+  },
+  {
+    label: "开通中",
+    value: 6
+  },
+  {
+    label: "开通失败",
+    value: 7
   }
 ]

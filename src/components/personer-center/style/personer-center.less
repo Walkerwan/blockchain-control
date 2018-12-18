@@ -45,6 +45,16 @@
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+        .item-content-input {
+          position: relative;
+          top: -10px;
+          width: 426px;
+          height: 100%;
+          padding-left: 105px;
+          padding-right: 30px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
         .item-set {
           position: absolute;
           top: 0;
@@ -69,19 +79,72 @@
         display: block;
         width: 105px;
         height: 27px;
+        line-height: 16px;
         margin-top: 15px;
-        .click-button {
-          display: block;
-          width: 85px;
-          height: 27px;
-          line-height: 27px;
-          margin: 0 auto;
-          background-color: #919191;
-          text-align: center;
-          color: #ffffff;
-          font-size: 15px;
-        }
+        padding: 0;
+        border: none;
+        font-size: 15px;
+        color: #ffffff;
+        background-color: #919191;
+        // .click-button {
+        //   display: block;
+        //   width: 85px;
+        //   height: 27px;
+        //   line-height: 27px;
+        //   margin: 0 auto;
+        //   background-color: #919191;
+        //   text-align: center;
+        //   color: #ffffff;
+        //   font-size: 15px;
+        // }
       }
+    }
+  }
+}
+
+#change-phone,
+#setting-user {
+  .form-item {
+    width: 100%;
+    .input-item {
+      position: relative;
+      width: 100%;
+      height: 38px;
+      box-sizing: border-box;
+      font-size: @fontSizeDefault;
+      color: @fontColorRegisterPlaceholder;
+      border: @borderWidthDeSmall solid @borderColorRegister;
+      background-color: rgba(255, 255, 255, 0);
+      border-radius: @borderRadiuDefault;
+      &::-webkit-input-placeholder {
+        color: @fontColorRegisterPlaceholder;
+        letter-spacing: 1px;
+      }
+      &.validate-num {
+        width: 40%;
+        // float: left;
+      }
+    }
+    .send-validate {
+      // float: left;
+      // margin-left: 10px;
+    }
+  }
+  .validate-time,
+  .send-validate {
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    font-size: @fontSizeDefault;
+  }
+  .validate-time {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .send-validate {
+    cursor: pointer;
+    &.disabled {
+      cursor: not-allowed;
     }
   }
 }

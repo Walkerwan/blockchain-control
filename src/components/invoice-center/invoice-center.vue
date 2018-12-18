@@ -9,9 +9,13 @@
       <div class="order-operate">
         <div class="order-time">
           <span class="order-time-text">订单日期</span>
-          <span class="time-select-start">2018-09-26</span>
+          <span class="time-select-start">
+            <DatePicker type="date" placeholder="选择日期" style="width: 120px;float:left;"></DatePicker>
+          </span>
           <span>至</span>
-          <span class="time-select-end">2018-09-26</span>
+          <span class="time-select-end">
+            <DatePicker type="date" placeholder="选择日期" style="width: 120px;float:left;"></DatePicker>
+          </span>
         </div>
         <div class="order-type">
           <span class="order-type-text">产生类型</span>

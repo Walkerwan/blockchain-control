@@ -3,58 +3,26 @@
     <div class="homepage-content">
       <div class="homepage-content-title">首页</div>
       <ul class="homepage-content-list">
-        <li class="list-item">
-          <span class="list-item-title">
-            <span class="title-text">积分通兑</span>
-            <Button class="title-manage" type="primary" @click="skipManageCenter">管理</Button>
-          </span>
-          <span class="list-item-title1">名称：小王的项目</span>
-          <span class="list-item-type">类型： 积分通兑</span>
-          <span class="list-item-set">配置：ZC-IN配置</span>
-          <span class="list-item-time">
-            <span class="time-title-text">
-              <i class="text-left">免费体验时间：</i>
-              <i class="text-right">2018-11-19 11:26</i>
-            </span>
-            <span class="time-title-dissolution">解散</span>
-          </span>
-        </li>
-        <li class="list-item">
-          <span class="list-item-title">
-            <span class="title-text">积分通兑</span>
-            <Button class="title-manage" type="primary">管理</Button>
-          </span>
-          <span class="list-item-title1">名称：小王的项目</span>
-          <span class="list-item-type">类型： 积分通兑</span>
-          <span class="list-item-set">配置：ZC-IN配置</span>
-          <span class="list-item-time">
-            <span class="time-title-text">
-              <i class="text-left">免费体验时间：</i>
-              <i class="text-right">2018-11-19 11:26</i>
-            </span>
-            <span class="time-title-dissolution">解散</span>
-          </span>
-        </li>
         <li class="list-item" @click="skipProductCenter">
           <div class="list-item-content">
             <span class="list-item-add"></span>
             <span class="list-item-add-describe">更多区块链产品请添加</span>
           </div>
         </li>
-        <li class="list-item">
+        <li class="list-item" v-for="(item,index) in homePageData" :key="index">
           <span class="list-item-title">
-            <span class="title-text">积分通兑</span>
-            <Button class="title-manage" type="primary">管理</Button>
+            <span class="title-text">{{item.cloudName}}</span>
+            <Button class="title-manage" type="primary" @click="skipManageCenter">管理</Button>
           </span>
-          <span class="list-item-title1">名称：小王的项目</span>
-          <span class="list-item-type">类型： 积分通兑</span>
-          <span class="list-item-set">配置：ZC-IN配置</span>
+          <span class="list-item-title1">名称：{{item.name}}</span>
+          <span class="list-item-type">类型： {{item.orderType == 0?"免费体检":"商户付费"}}</span>
+          <span class="list-item-set">配置：{{item.attrs[0].val}}</span>
           <span class="list-item-time">
             <span class="time-title-text">
-              <i class="text-left">免费体验时间：</i>
-              <i class="text-right">2018-11-19 11:26</i>
+              <i class="text-left">{{item.orderType == 0?"免费体验时间：":"商务版本到期时间："}}</i>
+              <i class="text-right">{{item.endTime}}</i>
             </span>
-            <span class="time-title-dissolution">解散</span>
+            <span class="time-title-dissolution" v-if="item.orderType == 0?true:false">解散</span>
           </span>
         </li>
       </ul>
@@ -72,7 +40,23 @@
 </template>
 
 <script>
+import RequestInterface from '@/api/interface.js';
+
 export default {
+  data() {
+    return {
+      homePageData: [],
+    }
+  },
+  created() {
+    const that = this;
+    RequestInterface.getHomePageList().then(res => {
+      if(res.status == 0) {
+        that.homePageData = res.data;
+        return;
+      }
+    })
+  },
   methods: {
     // 点击管理跳转至管理中心
     skipManageCenter() {

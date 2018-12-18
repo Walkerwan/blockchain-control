@@ -53,19 +53,32 @@
               width: 100%;
               height: 37px;
               margin-bottom: 40px;
+              .input-item {
+                position: relative;
+                width: 100%;
+                height: 38px;
+                box-sizing: border-box;
+                font-size: @fontSizeDefault;
+                color: @fontColorRegisterPlaceholder;
+                border: @borderWidthDeSmall solid @borderColorRegister;
+                background-color: rgba(255, 255, 255, 0);
+                border-radius: @borderRadiuDefault;
+                &::-webkit-input-placeholder {
+                  color: @fontColorRegisterPlaceholder;
+                  letter-spacing: 1px;
+                }
+              }
               &.form-item-setting {
                 height: 146px;
                 .setting-text {
                   width: 100%;
                   height: 146px;
+                  max-height: 146px;
+                  min-height: 146px;
                   font-size: 16px;
                   color: #8e8e8e;
                   padding: 10px 10px 0px 10px;
                 }
-              }
-              input {
-                width: 100%;
-                height: 37px;
               }
               .form-operate {
                 width: 240px;
