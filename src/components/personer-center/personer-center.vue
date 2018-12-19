@@ -25,10 +25,12 @@
         </div>
       </div>
       <div class="personor-content-right">
-        <img class="content-right-icon" src="./assets/user-icon.svg" alt="用户头像">
+        <img v-if="!userInfoLogo" class="content-right-icon" src='./assets/user-icon.svg' alt="用户头像">
+        <img v-if="userInfoLogo" class="content-right-icon" :src='userInfoLogo' alt="用户头像">
         <Upload
           ref="upload"
           :show-upload-list="false"
+          with-credentials
           :format="['jpg','jpeg','png']"
           :max-size="2048"
           :on-format-error="handleFormatError"
@@ -235,13 +237,30 @@ export default {
     RequestInterface.getUserInfomation().then(res => {
       if (res.status == 0) {
         that.userInfomation = res.data;
+        this.$store.commit("personer/setUserInfoLogo",res.data.logoPath);
+        return;
+      }
+      if(res.status == -1) {
+        this.$store.commit("personer/setUserInfoLogo",'');
+        return;
       }
     });
   },
+  computed: {
+    userInfoLogo() {
+      return this.$store.state.personer.userInfoLogo
+    }
+  },
   methods: {
     handleFormatError() {},
-    uploadSuccess() {
-      debugger
+    uploadSuccess(res) {
+      if(res.status == 0) {
+        if(res.data) {
+          this.$store.commit("personer/setUserInfoLogo",res.data);
+        }
+      } else {
+        this.$store.commit("personer/setUserInfoLogo",'');
+      }
     },
     handleMaxSize() {},
     revisePhone(type) {

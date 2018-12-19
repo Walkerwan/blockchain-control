@@ -76,7 +76,6 @@ export default {
     RequestInterface.getSettingList({
       skuId: skuId
     }).then(res => {
-      debugger
       if(res.status == 0) {
         if(res.data) {
           that.settingData = res.data;

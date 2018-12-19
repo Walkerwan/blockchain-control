@@ -168,6 +168,18 @@ class RequestInterface {
       })
     })
   }
+  // 解散服务
+  dissolutionService(params) {
+    return new Promise((resolve, reject) => {
+      this.fetch({
+        method: "get",
+        url: "/zcmf-website-business-view/order/disOrder",
+        params: params
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
   // 获取用户信息
   getUserInfomation() {
     return new Promise((resolve, reject) => {
@@ -269,6 +281,64 @@ class RequestInterface {
         method: "get",
         url: "/zcmf-website-business-view/cloud/queryCloudList",
         params: params
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
+  // 获取发票列表
+  getInvoiceDataList(params) {
+    return new Promise((resolve, reject) => {
+      this.fetch({
+        method: "get",
+        url: "/zcmf-website-business-view/invoice/list",
+        params: params
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
+  // 获取发票地址信息
+  getInvoiceAddressInfo() {
+    return new Promise((resolve, reject) => {
+      this.fetch({
+        method: "get",
+        url: "/zcmf-website-business-view/invoice/config/find",
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
+   // 修改发票地址信息
+   reviseInvoiceAddressInfo(params) {
+    return new Promise((resolve, reject) => {
+      this.fetch({
+        method: "post",
+        url: "/zcmf-website-business-view/invoice/config/save",
+        params: params
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
+  // 发票信息申请
+  applyInvoiceOrder(params) {
+    return new Promise((resolve, reject) => {
+      this.fetch({
+        method: "post",
+        url: "/zcmf-website-business-view/invoice/apply",
+        params: params
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
+  // 发票下载
+  downloadInvoiceInterface(params) {
+    return new Promise((resolve, reject) => {
+      this.fetch({
+        method: "get",
+        url: "/zcmf-website-business-view/invoice/download/"+params.id,
       }).then(res => {
         resolve(res);
       })

@@ -2,7 +2,7 @@
   <div class="homepage-container">
     <div class="homepage-content">
       <div class="homepage-content-title">首页</div>
-      <ul class="homepage-content-list">
+      <ul class="homepage-content-list clearfix">
         <li class="list-item" @click="skipProductCenter">
           <div class="list-item-content">
             <span class="list-item-add"></span>
@@ -22,7 +22,11 @@
               <i class="text-left">{{item.orderType == 0?"免费体验时间：":"商务版本到期时间："}}</i>
               <i class="text-right">{{item.endTime}}</i>
             </span>
-            <span class="time-title-dissolution" v-if="item.orderType == 0?true:false">解散</span>
+            <span
+              class="time-title-dissolution"
+              v-if="item.orderType == 0?true:false"
+              @click="dissolutionData(item,index)"
+            >解散</span>
           </span>
         </li>
       </ul>
@@ -40,22 +44,16 @@
 </template>
 
 <script>
-import RequestInterface from '@/api/interface.js';
+import RequestInterface from "@/api/interface.js";
 
 export default {
   data() {
     return {
-      homePageData: [],
-    }
+      homePageData: []
+    };
   },
   created() {
-    const that = this;
-    RequestInterface.getHomePageList().then(res => {
-      if(res.status == 0) {
-        that.homePageData = res.data;
-        return;
-      }
-    })
+    this.getHomePageListData();
   },
   methods: {
     // 点击管理跳转至管理中心
@@ -65,6 +63,32 @@ export default {
     // 跳转至产品中心
     skipProductCenter() {
       this.$router.push({ path: "/project/content/product" });
+    },
+    //获取首页列表数据
+    getHomePageListData() {
+      const that = this;
+      RequestInterface.getHomePageList().then(res => {
+        if (res.status == 0) {
+          that.homePageData = res.data;
+          return;
+        }
+      });
+    },
+    // 解散服务
+    dissolutionData(item,index) {
+      const that = this;
+      RequestInterface.dissolutionService({
+        orderNo: item.orderNo
+      }).then(res => {
+        if (res.status == 0) {
+          that.$Message.success(res.message);
+          that.homePageData.splice(index,1);
+          return;
+        }
+        if (res.status == -1) {
+          return;
+        }
+      });
     }
   }
 };

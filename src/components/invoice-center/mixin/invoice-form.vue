@@ -1,10 +1,14 @@
 <script>
+import RequestInterface from "@/api/interface.js";
+import InvoiceTool from "@/components/invoice-center/utils/invoice-tool.js";
+import { invoiceStateList } from "@/constant.js";
 export default {
   data() {
     return {
-      orderColumns: [
+      invoiceColumns: [
         {
           title: "序号",
+          width: 80,
           key: "sortNum",
           ellipsis: true,
           render: (h, params) => {
@@ -21,7 +25,8 @@ export default {
         },
         {
           title: "订单号",
-          key: "orderNum",
+          width: 200,
+          key: "orderNo",
           ellipsis: true,
           render: (h, params) => {
             return h(
@@ -31,13 +36,13 @@ export default {
                   fontSize: "18px"
                 }
               },
-              params.row.orderNum
+              params.row.orderNo
             );
           }
         },
         {
           title: "产品类型",
-          key: "productType",
+          key: "cloudName",
           ellipsis: true,
           render: (h, params) => {
             return h(
@@ -47,13 +52,13 @@ export default {
                   fontSize: "18px"
                 }
               },
-              params.row.productType
+              params.row.cloudName
             );
           }
         },
         {
           title: "计费方式",
-          key: "bilingWay",
+          key: "timeUnit",
           ellipsis: true,
           render: (h, params) => {
             return h(
@@ -63,13 +68,13 @@ export default {
                   fontSize: "18px"
                 }
               },
-              params.row.bilingWay
+              params.row.timeUnit
             );
           }
         },
         {
           title: "订单金额",
-          key: "orderMoney",
+          key: "orderPrice",
           ellipsis: true,
           render: (h, params) => {
             return h(
@@ -79,13 +84,14 @@ export default {
                   fontSize: "18px"
                 }
               },
-              params.row.orderMoney
+              params.row.orderPrice
             );
           }
         },
         {
           title: "订单时间",
-          key: "orderTime",
+          width: 250,
+          key: "createTime",
           ellipsis: true,
           render: (h, params) => {
             return h(
@@ -95,13 +101,13 @@ export default {
                   fontSize: "18px"
                 }
               },
-              params.row.orderTime
+              params.row.createTime
             );
           }
         },
         {
-          title: "订单状态",
-          key: "orderState",
+          title: "发票状态",
+          key: "statusDesc",
           ellipsis: true,
           render: (h, params) => {
             return h(
@@ -111,7 +117,7 @@ export default {
                   fontSize: "18px"
                 }
               },
-              params.row.orderState
+              params.row.statusDesc
             );
           }
         },
@@ -120,63 +126,157 @@ export default {
           key: "operate",
           ellipsis: true,
           render: (h, params) => {
+            const that = this;
+            if (params.row.status == 0 || params.row.status == 3) {
+              return h(
+                "span",
+                {
+                  style: {
+                    cursor: "pointer",
+                    fontSize: "18px"
+                  },
+                  on: {
+                    click: () => {
+                      that.applyInvoice(params);
+                    }
+                  }
+                },
+                "申请发票"
+              );
+            }
+            if (params.row.status == 2) {
+              return h(
+                "span",
+                {
+                  style: {
+                    cursor: "pointer",
+                    fontSize: "18px"
+                  },
+                  on: {
+                    click: () => {
+                      that.downloadInvoice(params);
+                    }
+                  }
+                },
+                "下载发票"
+              );
+            }
             return h(
               "span",
               {
                 style: {
+                  cursor: "pointer",
                   fontSize: "18px"
+                },
+                on: {
+                  click: () => {
+                    that.checkMoreDetail(params);
+                  }
                 }
               },
-              "详情"
+              "查看详情"
             );
           }
         }
       ],
-      orderDaTa: [
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        },
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        },
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        },
-        {
-          sortNum: 1,
-          orderNum: "yl233434ssf",
-          productType: "积分商城A",
-          bilingWay: "包年",
-          orderMoney: "7888.12元",
-          orderTime: "2018-09-26 00:50:13",
-          orderState: "待支付"
-        }
-      ],
-      orderTotal: 100,
-      orderPageSize: 10
+      invoiceDaTa: [],
+      invoiceTotal: 100,
+      invoicePageSize: 10,
+      invoiceTypeValue: "",// 产品类型的选中值
+      invoiceStateValue: "",// 状态的选中值
+      showInvoiceDetail: false, //模态框
+      targetInvoiceData: null, //目标行
+      targetPageIndex: 1,
+      invoiceType:[],//产品类型
+      invoiceStateList: invoiceStateList, //状态列表
+      lastLoginStart:'',
+      lastLoginEnd: '',
     };
   },
   methods: {
     // 切换页
-    togglePage() {}
+    togglePage(index) {
+      this.targetPageIndex = index;
+      this.getInvoiceDataListInterFace({
+        page: this.targetPageIndex,
+        rows: this.invoicePageSize
+      });
+    },
+    // 切换页码数
+    togglePageSize(size) {
+      this.invoicePageSize = size;
+      this.getInvoiceDataListInterFace({
+        page: this.targetPageIndex,
+        rows: this.invoicePageSize
+      });
+    },
+     // 搜索订单
+    searchInvoiceList() {
+      this.targetPageIndex = 1;
+      this.getInvoiceDataListInterFace({
+        cloudId: this.invoiceTypeValue,
+        status: this.invoiceStateValue,
+        lastLoginStart: this.lastLoginStart,
+        lastLoginEnd: this.lastLoginEnd,
+        page: this.targetPageIndex,
+        rows: this.invoicePageSize,
+      });
+    },
+    //申请发票
+    applyInvoice(params) {
+      this.targetInvoiceData = params.row;
+      this.showInvoiceDetail = true;
+    },
+    // 查看详情
+    checkMoreDetail(params) {
+      this.targetInvoiceData = params.row;
+      this.showInvoiceDetail = true;
+    },
+    // 下载发票
+    downloadInvoice(params) {
+      const that = this;
+      this.targetInvoiceData = params.row;
+      if (!this.targetInvoiceData.id) {
+        return;
+      }
+      InvoiceTool.downloadFile(
+        "http://172.16.5.113:8102/zcmf-website-business-view/invoice/download/" +
+          this.targetInvoiceData.id
+      );
+    },
+    //保存发票修改
+    saveInvoice() {
+      const that = this;
+      if (!this.targetInvoiceData.id) {
+        return;
+      }
+      RequestInterface.applyInvoiceOrder({
+        id: this.targetInvoiceData.id
+      }).then(res => {
+        if (res.status == 0) {
+          that.getInvoiceDataListInterFace();
+          that.$Message.success("申请成功！");
+          that.showInvoiceDetail = false;
+          return;
+        }
+        if (res.status == -1) {
+          that.$Message.error(res.message);
+          return;
+        }
+      });
+    },
+    //取消发票修改
+    cancelInvoice() {
+      this.showInvoiceDetail = false;
+    },
+     // 获取起始日期
+    getLastLoginStart(val,type){
+      this.lastLoginStart = val;
+    },
+    // 获取结束日期
+    getLastLoginEnd(val,type) {
+      this.lastLoginEnd = val;
+    }
   }
 };
 </script>

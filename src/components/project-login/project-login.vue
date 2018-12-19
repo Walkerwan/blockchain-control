@@ -16,7 +16,9 @@
                 <i class="login-line"></i>
               </FormItem>
               <FormItem class="form-item">
-                <div class="validate-sure"></div>
+                <div class="validate-sure">
+                  <span class="validate-text">向右滑动滑块填充拼图</span>
+                </div>
               </FormItem>
               <FormItem class="form-item">
                   <Button type="primary" class="button-item" @click="handleSubmit('formInline')">登录</Button>

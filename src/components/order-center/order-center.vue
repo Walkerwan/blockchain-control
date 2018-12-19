@@ -22,7 +22,7 @@
           </span>
         </div>
         <div class="order-type">
-          <span class="order-type-text">产生类型</span>
+          <span class="order-type-text">产品类型</span>
           <Select v-model="orderTypeValue" class="order-type-select" placeholder="全部">
             <Option value="">全部</Option>
             <Option v-for="(item, index) in orderType" :key="index" :value="item.id">{{item.name}}</Option>
@@ -92,6 +92,37 @@
         </div>
       </div>
     </div>
+    <Modal v-model="showOrderDetail" width="360" id="show-more-detail">
+        <p slot="header" style="color:#000;text-align:left">订单详情：</p>
+        <div>
+          <Form
+            inline
+            class="show-more-detail"
+            :label-width="120"
+          >
+            <FormItem  class="form-item" label= "订单编号：" >
+              <div class="form-item-text">{{targetOrderRow?targetOrderRow.orderNum:''}}</div>
+            </FormItem>
+            <FormItem  class="form-item" label= "产品类型：" >
+              <div class="form-item-text">{{targetOrderRow?targetOrderRow.productType:''}}</div>
+            </FormItem>
+            <FormItem  class="form-item" label= "计费方式：" >
+              <div class="form-item-text">{{targetOrderRow?targetOrderRow.bilingWay:''}}</div>
+            </FormItem>
+            <FormItem  class="form-item" label= "订单金额：" >
+              <div class="form-item-text">{{targetOrderRow?targetOrderRow.orderMoney+'元':''}}</div>
+            </FormItem>
+            <FormItem  class="form-item" label= "订单时间：" >
+              <div class="form-item-text">{{targetOrderRow?targetOrderRow.orderTime:''}}</div>
+            </FormItem>
+            <FormItem  class="form-item" label= "订单状态：" >
+              <div class="form-item-text">{{targetOrderRow?targetOrderRow.orderState:''}}</div>
+            </FormItem>
+          </Form>
+        </div>
+        <div slot="footer">
+        </div>
+      </Modal>
   </div>
 </template>
 
@@ -106,6 +137,7 @@ export default {
       orderTypeValue: "",
       orderStateValue: "",
       orderNum: '',
+      showOrderDetail:false,
     };
   },
   created() {
@@ -123,7 +155,6 @@ export default {
         params = {}
       }
       RequestInterface.getOrdingList(params).then(res => {
-        debugger;
         if (res.status == 0) {
           that.orderTotal = res.page.total;
           that.orderDaTa = res.data.map((item, index) => {
@@ -145,7 +176,6 @@ export default {
     getOrderListTypeData() {
       const that = this;
       RequestInterface.getOrdingListType().then(res => {
-        debugger
         if(res.status == 0) {
           that.orderType = res.data;
           return;
@@ -169,6 +199,20 @@ export default {
 #order-content-tab .ivu-table-header th {
   background-color: #8795a5 !important;
   color: #ffffff;
+}
+#show-more-detail .ivu-form-item-content {
+  font-size: 18px;
+}
+#show-more-detail .ivu-form-item-label {
+  font-size: 18px;
+}
+#show-more-detail .ivu-modal-header p {
+  font-size: 20px;
+  font-weight: normal;
+}
+#show-more-detail .ivu-modal-footer {
+  padding: 0;
+  border-top: none;
 }
 </style>
 

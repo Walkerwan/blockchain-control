@@ -153,3 +153,26 @@ export const orderStateList = [
     value: 7
   }
 ]
+
+export const invoiceStateList = [
+  {
+    label: "全部",
+    value: -1
+  },
+  {
+    label: "待申请",
+    value:0
+  },
+  {
+    label: "申请中",
+    value:1
+  },
+  {
+    label: "申请成功",
+    value: 2
+  },
+  {
+    label: "审核失败",
+    value: 3
+  },
+]

@@ -70,6 +70,7 @@
 
 import TradeRecordForm from "./mixin/trade-record-form.vue";
 import NodeRecordForm from "./mixin/node-record-form.vue";
+import RequestInterface from '@/api/interface.js';
 
 export default {
   mixins: [TradeRecordForm,NodeRecordForm],
@@ -102,6 +103,12 @@ export default {
         }
       ]
     };
+  },
+  created() {
+
+  },
+  methods: {
+
   }
 };
 </script>

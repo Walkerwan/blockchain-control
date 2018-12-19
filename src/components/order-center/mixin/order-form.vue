@@ -72,7 +72,7 @@ export default {
           }
         },
         {
-          title: "订单金额（/元",
+          title: "订单金额（/元）",
           key: "orderMoney",
           ellipsis: true,
           render: (h, params) => {
@@ -125,11 +125,19 @@ export default {
           key: "operate",
           ellipsis: true,
           render: (h, params) => {
+            const that = this;
             return h(
               "span",
               {
                 style: {
-                  fontSize: "18px"
+                  fontSize: "18px",
+                  cursor: "pointer",
+                },
+                on: {
+                  click: () => {
+                    that.targetOrderRow = params.row;
+                    that.showOrderDetail =true;
+                  }
                 }
               },
               "详情"
@@ -145,6 +153,7 @@ export default {
       orderStateList: orderStateList,
       lastLoginStart:'',
       lastLoginEnd: '',
+      targetOrderRow:null,
     };
   },
   methods: {
@@ -166,7 +175,6 @@ export default {
     },
     // 搜索订单
     searchOrderList() {
-      debugger
       this.targetPageIndex = 1;
       this.getOrderListData({
         orderNo: this.orderNum,
@@ -175,7 +183,7 @@ export default {
         lastLoginStart: this.lastLoginStart,
         lastLoginEnd: this.lastLoginEnd,
         page: this.targetPageIndex,
-        rows: this.orderPageSize
+        rows: this.orderPageSize,
       });
     },
     // 获取起始日期
