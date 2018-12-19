@@ -86,7 +86,7 @@ export default {
           return;
         }
         if (res.status == -1) {
-          return;
+          return
         }
       });
     }
